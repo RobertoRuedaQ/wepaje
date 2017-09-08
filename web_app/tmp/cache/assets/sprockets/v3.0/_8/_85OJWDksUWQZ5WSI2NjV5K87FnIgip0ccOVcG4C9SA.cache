@@ -1,0 +1,21 @@
+I"A(function() {
+  $(function() {
+    return $(document).on('change', '#user_state_select', function(evt) {
+      return $.ajax('update_cities', {
+        type: 'GET',
+        dataType: 'script',
+        data: {
+          state_id: $("#user_state_select option:selected").val()
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          return console.log("AJAX Error: " + textStatus);
+        },
+        success: function(data, textStatus, jqXHR) {
+          return console.log("Dynamic country select OK!");
+        }
+      });
+    });
+  });
+
+}).call(this);
+:ET

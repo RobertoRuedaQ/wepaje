@@ -1,0 +1,13 @@
+<ul>
+  <% @users.each do |user| %>
+    <li><%= user.first_name %></li>
+    <% if user.referreds.count > 0 %>
+    <ul>
+      <li>Este usuario tiene referidos y sus referidos son:</li>
+      <% user.referreds.each do |referred| %>
+        <%= referred.user_referred_id %>
+      <% end %>
+    </ul>
+    <% end %>
+  <% end %>
+</ul>

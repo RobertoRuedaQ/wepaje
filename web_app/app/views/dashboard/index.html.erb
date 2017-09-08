@@ -1,0 +1,23 @@
+
+Este es tu dashboard, aqui encontraras informacion sobre tus compras y tus referidos.
+
+<h1>Informacion general</h1>
+<div>
+	<ul>
+		<li>nombre: <%=current_user.first_name%> <%=current_user.last_name%></li>
+		<li>Documento de identidad: <%=current_user.document_id%></li>
+		<li>Correo electronico: <%=current_user.email%></li>
+		<li>Direccion: <%=current_user.address%></li>
+		<li>Barrio: <%=current_user.neighborhood%></li>
+		<li>Metodo de pago: <%=current_user.payment_method%></li>
+	</ul>
+</div>
+
+<h1>Referidos</h1>
+
+tus referidos son:
+<%=@referreds.each do |referido|%>
+<%=referido.first_name%> <%=referido.last_name%>
+<%end%> 
+
+<h1>Compras</h1>

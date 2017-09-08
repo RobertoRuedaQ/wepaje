@@ -1,0 +1,112 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  #formulario de inscripcion del usuario
+  <div class="field">
+    <%= f.label :first_name, t('Primer nombre')%><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :middle_name, t('Segundo nombre') %><br />
+    <%= f.text_field :middle_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, t('Primer apellido') %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :second_last_name, t('Segundo apellido') %><br />
+    <%= f.text_field :second_last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_day, t('Fecha de nacimiento') %><br />
+    <%= f.date_field(:birth_day)%>
+  </div>
+   <div class="field">
+    <%= f.label :type_of_document, t('Selecciona el tipo de documento')%><br />
+    <%= f.select :type_of_document,['Cedula','NIT']%>    
+  </div>
+  <div class="field">
+    <%= f.label :document_id, t('Numero de documento') %><br />
+    <%= f.number_field :document_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, t('Correo electronico')%><br />
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, t('Constraseña')%>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> caracteres minimo)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, t('Confirmar constraseña') %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :referred_code, t('Codigo referido')%><br />
+    <%= f.text_field :referred_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, t('Direccion')%>
+    <%= f.text_field :address%>
+  </div>
+  <div class="field">
+    <%= f.label :neighborhood, t('Barrio')%>
+    <%= f.text_field :neighborhood%> 
+  </div>
+  
+  <div class="field">
+    <%= f.label :state, t('Departamento')%>
+    <%= f.collection_select :state, Geolombia::State.all, :code, :name, include_blank: true %>  
+  </div>
+
+  <div class="field">
+    <%= f.label :city, t('Ciudad')%>
+    <%= f.grouped_collection_select :city, Geolombia::State.all, :cities, :name, :code, :name, include_blank: true %>    
+  </div>
+  <div class="field">
+    <%= f.label :zipcode, t('Codigo postal')%>
+    <%= f.text_field :zipcode%>  
+  </div>
+  <div class="field">
+    <%= f.label :payment_method, t('Metodo de pago')%>
+    <%=f.radio_button(:payment_method, 'Banco')%>
+    <%= f.label :payment_method, t('Transaccion bancaria')%>
+    <%=f.radio_button(:payment_method, 'Tarjeta monedero') %>
+    <%= f.label :payment_method, t('Tarjeta monedero')%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Registrar" %>
+  </div>
+<% end %>
+<script type="text/javascript">
+  jQuery(function() {
+  var city = $('#user_city').html();
+
+  return $('#user_state').change(function() {
+    var state, options;
+    state = $('#user_state :selected').text();
+    options = $(city).filter("optgroup[label=" + state + "]").html();
+ 
+    if (options) {
+      return $('#user_city').html(options);
+    } else {
+      return $('#user_city').empty();
+    }
+  });
+});
+
+</script>
+<%= render "devise/shared/links" %>
